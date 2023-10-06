@@ -3,6 +3,7 @@ import { useState } from 'react';
 import * as XLSX from 'xlsx';
 import OrderDetailsTable from './OrderDetailsTable';
 import Details from './Details';
+import Header from './Header';
 
 const FileUpload = () => {
 
@@ -30,7 +31,7 @@ const FileUpload = () => {
      };
 
      return (
-          <>
+          <>   <Header />
                <div className='container-fluid'>
                     <div className='col col-md-8 col-lg-6 my-3 mx-auto'>
                          <label htmlFor="file-upload" className='text-dark'>Upload excel file</label> <span className='text-danger'>*</span>
