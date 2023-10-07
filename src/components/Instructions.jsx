@@ -37,7 +37,7 @@ const Instructions = () => {
 
                <Modal show={show} onHide={handleClose} size="xl">
                     <Modal.Header closeButton>
-                         <Modal.Title>Instruction</Modal.Title>
+                         <Modal.Title>Instructions</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                          <ol>
