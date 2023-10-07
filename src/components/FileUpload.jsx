@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import * as XLSX from 'xlsx';
 import OrderDetailsTable from './OrderDetailsTable';
 import Details from './Details';
 import Header from './Header';
 import Instructions from './Instructions';
+import { useNavigate } from 'react-router-dom';
 
 const FileUpload = () => {
 
      const [excelData, setExcelData] = useState(null);
+     const navigate = useNavigate();
 
      const handleFileSelect = (event) => {
           const file = event.target.files[0];
@@ -30,6 +32,14 @@ const FileUpload = () => {
                reader.readAsArrayBuffer(file);
           }
      };
+
+     useEffect(() => {
+          if (localStorage.getItem("password")) {
+               navigate("/home");
+          } else {
+               navigate("/");
+          }
+     }, [navigate])
 
      return (
           <>

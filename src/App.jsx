@@ -1,12 +1,17 @@
 import React from 'react'
-import FileUpload from './components/FileUpload'
 import { Routes, Route } from 'react-router-dom'
-
+import Password from './components/Password'
+import FileUpload from './components/FileUpload'
+import { ToastContainer } from 'react-toastify'
 const App = () => {
      return (
-          <Routes>
-               <Route path='/' element={<FileUpload />} />
-          </Routes>
+          <>
+               <ToastContainer />
+               <Routes>
+                    <Route path='/' element={<Password />} />
+                    <Route path='/home' element={<FileUpload />} />
+               </Routes>
+          </>
      )
 }
 
