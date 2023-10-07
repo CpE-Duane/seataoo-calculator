@@ -8,16 +8,19 @@ const Details = ({ excelData }) => {
      const [onTheWay, setOnTheWay] = useState(0);
      const [pickedUp, setPickedUp] = useState(0);
      const [delivered, setDelivered] = useState(0);
+     const [confirmed, setConfirmed] = useState(0);
      const [totalOrderAmount, setTotalOrderAmount] = useState(0);
      const [totalPickUpAmount, setTotalPickUpAmount] = useState(0);
      const [pendingPickupAmount, setPendingPickupAmount] = useState(0)
      const [pendingOrderAmount, setPendingOrderAmount] = useState(0)
+     const [profit, setProfit] = useState(0)
 
      const getOrderDetails = () => {
           let sumOfpendingOrders = 0;
           let sumOfOnTheWay = 0;
           let sumOfPickedUp = 0;
           let sumOfDelivered = 0;
+          let sumOfConfirmed = 0
 
           excelData.forEach((order) => {
                if (order["Picking status"] === "pending") {
@@ -28,13 +31,16 @@ const Details = ({ excelData }) => {
                     sumOfPickedUp++;
                } else if (order["Picking status"] === "delivered") {
                     sumOfDelivered++;
-               }
+               } else if (order["Picking status"] === "confirmed") {
+                    sumOfConfirmed++;
+               } 
           })
 
           setPendingOrders(sumOfpendingOrders);
           setOnTheWay(sumOfOnTheWay);
           setPickedUp(sumOfPickedUp);
           setDelivered(sumOfDelivered);
+          setConfirmed(sumOfConfirmed);
      }
 
      const getTotals = () => {
@@ -46,16 +52,20 @@ const Details = ({ excelData }) => {
 
           excelData.forEach((order) => {
                orderAmount += order["Order amount"]
-               pendingOrderAmt += order["Picking status"] !== "pending" ? order["Order amount"] : 0
+               pendingOrderAmt += order["Picking status"] === "pending" ? order["Order amount"] : 0
 
-               pendingPickupAmt += order["Picking status"] !== "pending" ? order["Pickup Amount"] : 0
+               pendingPickupAmt += order["Picking status"] === "pending" ? order["Pickup Amount"] : 0
                pickupAmount += order["Pickup Amount"]
           })
 
-          setPendingOrderAmount(orderAmount - pendingOrderAmt)
-          setPendingPickupAmount(pickupAmount - pendingPickupAmt)
+          setPendingOrderAmount(pendingOrderAmt)
+          setPendingPickupAmount(pendingPickupAmt)
           setTotalOrderAmount(orderAmount);
           setTotalPickUpAmount(pickupAmount);
+
+          const profit = (orderAmount - pendingOrderAmt) - (pickupAmount - pendingPickupAmt)
+
+          setProfit(profit);
      }
 
      useEffect(() => {
@@ -91,6 +101,9 @@ const Details = ({ excelData }) => {
                                              </li>
                                              <li className='list-group-item'>
                                                   Picked Up: <span className='fst-italic text-success fw-bold float-end'>{pickedUp}</span>
+                                             </li>
+                                             <li className='list-group-item'>
+                                                  Confirmed: <span className='fst-italic text-success fw-bold float-end'>{confirmed}</span>
                                              </li>
                                              <li className='list-group-item'>
                                                   Total Orders: <span className='fst-italic text-success fw-bold float-end'>{excelData?.length}</span>
@@ -131,7 +144,7 @@ const Details = ({ excelData }) => {
                                              </li>
                                              <br />
                                              <li className='list-group-item'>
-                                                  Total Profit: <span className='fst-italic text-success fw-bold float-end'>{formatToPeso(totalOrderAmount - totalPickUpAmount)}</span>
+                                                  Total Profit: <span className='fst-italic text-success fw-bold float-end'>{formatToPeso(profit)}</span>
                                              </li>
                                         </ul>
                                    </div>
