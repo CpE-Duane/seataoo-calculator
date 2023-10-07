@@ -4,6 +4,7 @@ import * as XLSX from 'xlsx';
 import OrderDetailsTable from './OrderDetailsTable';
 import Details from './Details';
 import Header from './Header';
+import Instructions from './Instructions';
 
 const FileUpload = () => {
 
@@ -31,7 +32,8 @@ const FileUpload = () => {
      };
 
      return (
-          <>   <Header />
+          <>
+               <Header />
                <div className='container-fluid'>
                     <div className='col col-md-8 col-lg-6 my-3 mx-auto'>
                          <label htmlFor="file-upload" className='text-dark'>Upload excel file</label> <span className='text-danger'>*</span>
@@ -40,6 +42,7 @@ const FileUpload = () => {
                               className='form-control border-dark mt-2'
                               onChange={handleFileSelect}
                          />
+                         <Instructions />
                     </div>
                     {
                          excelData

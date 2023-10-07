@@ -1,0 +1,19 @@
+html {
+     font-size: clamp(13px, 2vw, 16px); /* Responsive font size for mobile and larger screens */
+   }
+   
+   body {
+     font-size: 0.7rem; /* Set a base font size for the body */
+   }
+   
+   h1, h2, h3, h4, h5, h6 {
+     font-size: clamp(0.8rem, 2vw, 2rem); /* Responsive font size for headings */
+   }
+   
+   p {
+     font-size: clamp(0.7rem, 1.5vw, 0.8rem); /* Responsive font size for paragraphs */
+   }
+
+   
+
+
