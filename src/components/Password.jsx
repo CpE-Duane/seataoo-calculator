@@ -34,7 +34,7 @@ const Password = () => {
           <>
                <div className="container-fluid vh-100 bg-light">
                     <div className="row h-100 d-flex justify-content-center align-items-center">
-                         <div className="col-3">
+                         <div className="col col-md-6 col-lg-4 col-xl-3">
                               <div className="card bg-white shadow-lg border-0 rounded-0">
                                    <div className="card-body">
                                         <label>Enter password: <span className='text-danger'>*</span></label>
